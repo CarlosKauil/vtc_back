@@ -62,14 +62,14 @@ export default function Info({ showFooter = true }) {
         <section className="max-w-7xl mx-auto py-12">
           <div className="flex flex-col-reverse md:flex-row items-center md:items-start gap-8 md:gap-16">
             <div className="md:w-1/2 flex flex-col justify-center space-y-6 text-center md:text-left">
-              <h2 className="text-4xl md:text-5xl font-bold uppercase text-white">
+              <h2 className="font-['Zen_Dots'] text-4xl md:text-5xl font-bold uppercase text-white">
                 ¿Qué es VARTICA Metaverse?
               </h2>
               <br />
               <hr />
               <br />
 
-              <p className="text-lg text-[#ddfff2] text-justify">
+              <p className=" text-lg text-[#ddfff2] text-justify">
                 VARTICA Metaverse es un entorno digital inmersivo que combina el arte
                 tradicional y la tecnología actual para crear experiencias únicas en un espacio tridimensional.
                 Este metaverso está diseñado específicamente para artistas, brindándoles un escenario global
@@ -136,7 +136,7 @@ export default function Info({ showFooter = true }) {
         <section className="mt-16 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-lg p-8 md:p-12 max-w-7xl mx-auto mb-10">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h3 className="text-[#ddfff2] mb-6 text-2xl font-bold">Más Detalles</h3>
+              <h3 className="text-[#ddfff2] mb-6 text-2xl font-bold font-['Zen_Dots'] tracking-wide">Más Detalles</h3>
               <p className="text-lg text-[#ddfff2] text-justify mb-6">
                 VARTICA Metaverse es un entorno digital inmersivo que combina arte tradicional y tecnología actual para crear experiencias únicas en un espacio tridimensional.
                 Está pensando para artistas que buscan innovar, conectar y exponer sus obras al mundo.
@@ -147,18 +147,18 @@ export default function Info({ showFooter = true }) {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-gradient-to-br p-2 from-cyan-500/20 to-cyan-600/20 backdrop-blur-sm border border-cyan-400/30 p-6 rounded-xl">
-                <div className="text-[#ddfff2] mb-2 font-bold">Experiencia 3D</div>
+              <div className="bg-gradient-to-br p-2 from-cyan-500/20 to-cyan-600/20 backdrop-blur-sm border border-cyan-400/30 p-6 rounded-xl mb-2">
+                <div className="text-[#ddfff2] mb-2 font-['Zen_Dots'] tracking-wide">Experiencia 3D</div>
                 <div className="text-cyan-200">Espacio Tridimensional Inmersivo</div>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm border border-purple-400/30 p-6 rounded-xl">
-                <div className="text-[#ddfff2] mb-2 font-bold">Interactividad</div>
+              <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm border border-purple-400/30 p-6 rounded-xl mb-2">
+                <div className="text-[#ddfff2] mb-2 font-['Zen_Dots'] tracking-wide">Interactividad</div>
                 <div className="text-purple-200">Conexión en Tiempo Real</div>
               </div>
 
-              <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm border border-green-400/30 p-6 rounded-xl">
-                <div className="text-[#ddfff2] mb-2 font-bold">Alcance Global</div>
+              <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm border border-green-400/30 p-6 rounded-xl mb-2">
+                <div className="text-[#ddfff2] mb-2 font-['Zen_Dots'] tracking-wide">Alcance Global</div>
                 <div className="text-green-200">Audiencia Mundial</div>
               </div>
             </div>

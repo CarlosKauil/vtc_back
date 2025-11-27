@@ -9,7 +9,7 @@ export default function Navbar() {
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="text-white text-2xl hover:text-white/80 transition-colors">
+            <a href="/" className="text-white text-2xl hover:text-white/80 transition-colors font-['Zen_Dots']">
               Kreaverse
             </a>
 
@@ -37,7 +37,7 @@ export default function Navbar() {
             </button>
 
             {/* Links de navegación - Desktop */}
-            <ul className="hidden md:flex gap-8 items-center">
+            <ul className="hidden md:flex gap-8 items-center font-['Zen_Dots']">
               <li>
                 <a 
                   href="/" 
