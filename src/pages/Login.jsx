@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { login } from '../api/auth';
-import './login.css';
+import './Login.css';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 
