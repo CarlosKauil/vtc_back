@@ -1,0 +1,243 @@
+/* src/styles/Auth.css */
+
+/* --- FUENTES Y ESTILOS BASE --- */
+/* (Recuerda mover las importaciones de fuentes a tu index.html para mejor rendimiento) */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+.auth-page-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/images/fondo.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.corner-img {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  z-index: 2;
+  top: 20px;
+}
+.corner-img.left { left: 20px; }
+.corner-img.right { right: 20px; }
+
+/* --- TARJETA DE AUTENTICACIÓN (ESTILO LOGIN) --- */
+.auth-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 420px; /* Ancho por defecto para el login */
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modificador para la tarjeta de registro más ancha */
+.auth-card.register {
+  max-width: 700px;
+}
+
+/* --- LOGO --- */
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.auth-logo .vartica {
+  font-family: 'Zen Dots', sans-serif;
+  font-size: 2.5rem;
+  color: #fff;
+}
+.auth-logo .metaverse {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  margin-left: 12px;
+  color: #fff;
+}
+.auth-logo .title-img {
+  max-width: 260px;
+  width: 100%;
+}
+
+/* --- FORMULARIO Y CAMPOS --- */
+.auth-form, .auth-form-grid {
+  width: 100%;
+}
+
+.auth-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.auth-field {
+  margin-bottom: 20px;
+}
+/* La grid ya tiene gap, así que eliminamos el margen inferior para sus campos */
+.auth-form-grid .auth-field {
+  margin-bottom: 0;
+}
+
+.auth-field label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.auth-field input,
+.auth-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-weight: 700;
+}
+
+/* --- BOTONES --- */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.btn {
+  flex: 1 1 150px;
+  min-width: 140px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.btn-primary {
+  background: #6E8CFB;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #636CCB;
+}
+.btn-google {
+  background: #ea4335;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-google:hover {
+  background: #b13024;
+}
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-link {
+  border: none;
+  color: #adbef7;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-decoration: none;
+  text-align: center;
+  flex: 1; /* Para que ocupe el espacio en la fila de acciones */
+}
+.btn-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* --- OTROS ENLACES Y MENSAJES --- */
+.auth-link { text-align: center; font-size: 1rem; color: #fff; }
+.auth-link a { color: #adbef7; text-decoration: none; font-weight: 600; }
+.auth-link a:hover { text-decoration: underline; }
+.auth-error { color: #ff4f4f; text-align: center; margin-top: 16px; font-weight: 600; }
+
+.auth-success {
+  /* Diseño del recuadro */
+  background-color: rgba(45, 211, 111, 0.15); /* Fondo verde semi-transparente */
+  border: 1px solid rgba(45, 211, 111, 0.4);   /* Borde verde */
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  
+  /* Estilo del texto */
+  color: #16a34a; /* Texto verde más oscuro para mejor contraste */
+  font-weight: 600;
+  text-align: left; /* Alineación para el icono */
+
+  /* Alineación del icono con el texto */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.register-actions {
+  grid-column: span 2;
+  display: flex;
+  gap: 1rem;
+}
+.register-actions .btn {
+  flex: 1;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 32px 24px;
+    margin: 0;
+  }
+  .auth-card.register {
+    max-width: 100%;
+  }
+  .auth-form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .register-actions {
+    grid-column: span 1;
+  }
+  .btn-row {
+    flex-direction: column;
+  }
+  .corner-img { display: none; }
+}

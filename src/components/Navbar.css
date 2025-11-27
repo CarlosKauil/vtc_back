@@ -1,0 +1,150 @@
+/* --- CORRECCIÓN --- */
+/* Las importaciones de fuentes se eliminaron. Deben estar en tu index.html */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0d1117;
+  color: #fff;
+}
+
+.navbar-container {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  position: relative; 
+  font-family: 'Zen dots', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5383b633;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 15px;
+  margin: 10px auto;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  z-index: 10;
+}
+
+.navbar-links {
+  list-style: none;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  background-color: #5383b633;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 20px 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.navbar-links.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  /* --- CORRECCIÓN --- */
+   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar-links a {
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #00ffff;
+}
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.menu-toggle .bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* --- MEDIA QUERY PARA ESCRITORIO --- */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .navbar {
+    width: 80%;
+    /* --- CORRECCIÓN --- */
+    /* Este padding asegura que el logo y los links estén a 40px de los bordes */
+    padding: 10px 40px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .navbar-links {
+    position: static;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    flex-direction: row;
+    opacity: 1;
+    pointer-events: auto;
+    gap: 40px;
+    border: none;
+    padding: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    /* Se asegura que la transformación del menú móvil no afecte */
+    transform: none; 
+  }
+}

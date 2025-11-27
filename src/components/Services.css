@@ -1,0 +1,32 @@
+.services {
+  background-image:
+  linear-gradient(
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)
+  ),
+  url('/images/Quienes.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    padding: 100px 0;
+    height: 100vh;
+}
+
+.services-content {
+    text-align: center;
+}
+
+.services-content h2 {
+    font-size: 55px;
+    line-height: 70px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.services-content h3 {
+    font-size: 32px;
+    color: #dfdfdf;
+    margin-bottom: 50px;
+    padding: 0 100px;
+}

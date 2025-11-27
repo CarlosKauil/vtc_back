@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+.login-page-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/images/fondo.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  padding: 16px;
+}
+
+.login-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.login-container {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-vartica {
+  font-family: 'Zen Dots', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.login-metaverse {
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin-left: 12px;
+  vertical-align: middle;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.login-field {
+  margin-bottom: 20px;
+}
+
+.login-field label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-weight: 700;
+  box-sizing: border-box;
+  backdrop-filter: blur(4px);
+}
+
+.login-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+  justify-content: center;
+}
+
+
+
+.login-btn,
+.login-btn-google {
+  flex: 1 1 150px;
+  min-width: 140px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+a .black-btn {
+  flex: 1 1 100px;
+  min-width: 140px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #333;
+  color: #fff;
+}
+
+.login-btn {
+  background: #6E8CFB;
+  color: #fff;
+}
+
+.login-btn:hover {
+  background: #636CCB;
+}
+
+.login-btn-google {
+  background: #fff;
+  color: #444;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.login-btn-google:hover {
+  background: #b13024;
+}
+
+.login-google-g {
+  
+  margin: 5px;
+  border-color: #ea4335;
+}
+.login-google-g:hover
+{
+  color: #4285f4;
+}
+
+  .login-btn-google {
+    background-color: #ea4335;
+    color: #fff;
+  }
+
+.login-register {
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.login-register a {
+  color: #adbef7;
+  text-decoration: none;
+  font-weight: 600;
+
+}
+
+.login-register a:hover {
+  color: #ffffff;
+}
+
+.login-register a:hover {
+  text-decoration: underline;
+}
+
+.login-error {
+  color: #ff4f4f;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.volver-btn {
+  text-decoration: none;
+  background-color: #0df86b;
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  margin-top: 20px;
+}
+
+.volver-btn:hover {
+  background-color: #0ac053;
+  color: #fff;
+
+}
+
+.back-icon {
+  font-size: 1.2rem;
+}
+
+.corner-img {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  z-index: 2;
+  top: 0;
+  pointer-events: none;
+}
+
+.corner-img.left {
+  left: 0;
+}
+
+.corner-img.right {
+  right: 0;
+}
+
+/* Responsive para móviles y tablets */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 32px 24px;
+    max-width: 100%;
+    border-radius: 20px;
+    margin: 0 16px;
+  }
+
+  .login-logo {
+    margin-bottom: 20px;
+  }
+
+  .login-vartica {
+    font-size: 2rem;
+  }
+
+  .login-metaverse {
+    font-size: 1rem;
+  }
+
+  .login-btn-row {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .corner-img {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 24px 16px;
+  }
+
+  .login-vartica {
+    font-size: 1.8rem;
+  }
+
+  .login-metaverse {
+    font-size: 0.9rem;
+  }
+
+  .login-field label {
+    font-size: 1rem;
+  }
+
+  .login-field input {
+    font-size: 0.95rem;
+  }
+
+  .login-btn,
+  .login-btn-google {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .corner-img {
+    width: 64px;
+  }
+}
