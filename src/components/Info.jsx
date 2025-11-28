@@ -163,6 +163,12 @@ export default function Info({ showFooter = true }) {
               </div>
             </div>
           </div>
+          <div className="div">
+            <iframe
+              src="http://localhost:8088/superset/dashboard/1/"
+              style={{ width: "100%", height: "90vh", border: "none" }}
+            />
+          </div>
         </section>
       </main>
 

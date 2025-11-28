@@ -182,6 +182,19 @@ export default function Sidebar({ open, setOpen }) {
                 Dashboard de Datos
               </Link>
 
+              <Link
+                to="/supersetdashboard"
+                className={`flex items-center gap-3 p-3 rounded-lg transition ${
+                  isActive("/supersetdashboard")
+                    ? "bg-gray-700"
+                    : "hover:bg-gray-700"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                <FaChartPie size={20} />
+                Dashboard de Kreaverse
+              </Link>
+
               {/* Dropdown de Obras */}
               <div className="relative">
                 <button

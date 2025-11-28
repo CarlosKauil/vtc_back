@@ -35,9 +35,8 @@ import CreateAuction from "./components/Auctions/CreateAuction";
 
 //
 import AreaDetail from './pages/AreaDetail';
-
 import ActiveAuctionsPage from './pages/ActiveAuctionsPage';
-
+import SupersetDashboard from './components/SupersetDashboard';
 // 🔐 Rutas protegidas
 import PrivateRoute from './components/PrivateRoute';
 
@@ -55,7 +54,8 @@ function App() {
         <Route path="/artist-register" element={<ArtistRegister />} />
         <Route path="/area/:area" element={<AreaDetail />} />
         <Route path="/active-auctions" element={<ActiveAuctionsPage />} />
-
+        <Route path="/supersetdashboard" element={<SupersetDashboard />} />
+        
 
         {/* 🧑‍🎨 Perfil público del artista (no requiere login) */}
         <Route path="/artist/:link" element={<PublicProfileView />} />

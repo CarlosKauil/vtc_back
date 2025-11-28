@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://backend-z57u.onrender.com', //https://backend-z57u.onrender.com/ , http://localhost:8000/api
+  baseURL: 'http://localhost:8000/api', //https://backend-z57u.onrender.com/ , http://localhost:8000/api
 });
 
 // ======= AUTENTICACIÓN Y USUARIO =======
