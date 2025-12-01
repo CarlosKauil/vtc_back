@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // URL base de tu API Laravel
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://backend-z57u.onrender.com/api';
 
 /**
  * Servicio para gestionar las operaciones de subastas
