@@ -76,6 +76,17 @@ export default function ArtistRegister() {
               maxLength="11"
             />
           </div>
+          <div className="auth-field">
+            <label>Alias artistico</label>
+            <input
+              name="alias"
+              placeholder="Nombre completo (máx. 11)"
+              value={form.alias}
+              onChange={handleChange}
+              required
+              maxLength="11"
+            />
+          </div>
 
           <div className="auth-field">
             <label>Correo electrónico</label>
