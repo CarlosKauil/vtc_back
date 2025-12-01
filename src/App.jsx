@@ -39,6 +39,8 @@ import ActiveAuctionsPage from './pages/ActiveAuctionsPage';
 import SupersetDashboard from './components/SupersetDashboard';
 // 🔐 Rutas protegidas
 import PrivateRoute from './components/PrivateRoute';
+import PricingPlans from './pages/PricingPlans';
+import TermsAndConditions from './components/TermsAndConditions';
 
 function App() {
   return (
@@ -55,6 +57,8 @@ function App() {
         <Route path="/area/:area" element={<AreaDetail />} />
         <Route path="/active-auctions" element={<ActiveAuctionsPage />} />
         <Route path="/supersetdashboard" element={<SupersetDashboard />} />
+        <Route path="/pricing-plans" element={<PricingPlans />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         
 
         {/* 🧑‍🎨 Perfil público del artista (no requiere login) */}

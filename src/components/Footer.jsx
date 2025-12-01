@@ -7,7 +7,7 @@ export default function Footer() {
     { to: "/info", text: "Información" },
     { to: "/metaverso", text: "Metaverso" },
     { to: "/login", text: "Login" },
-    { to: "/terminos", text: "Términos y Condiciones", hasIcon: true },
+    { to: "/terms-and-conditions", text: "Documentos Legales", hasIcon: true },
   ];
 
   return (

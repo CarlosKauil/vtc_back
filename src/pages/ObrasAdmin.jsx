@@ -132,7 +132,7 @@ export default function ObrasAdmin() {
 
     return (
         <DashboardLayout>
-            <div className="bg-white rounded-xl shadow-md p-6 mt-4">
+            <div className="bg-white rounded-xl  mt-4">
                 <h2 className="text-2xl font-bold mb-4 text-gray-800">Administración de Obras</h2>
                 {msg && (
                     <p 

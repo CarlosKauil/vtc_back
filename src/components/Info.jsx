@@ -19,14 +19,17 @@ function InfoCard({ icon: Icon, title, description }) {
       <h4 className="text-lg font-semibold text-slate-900 text-center mb-2">{title}</h4>
       <p className="text-slate-700 text-center text-sm">{description}</p>
     </div>
-  );
+  );  
 }
 
 // Imágenes del carrusel
 const heroImages = [
-  { src: "/images/img-meta.png", alt: "VARTICA Metaverse" },
-  { src: "https://i.pinimg.com/736x/7a/d0/ae/7ad0ae3031d9825c9416550c85be8934.jpg", alt: "VARTICA Experiencia Digital" },
-  { src: "https://i.pinimg.com/736x/05/1d/13/051d130ada50096d6dbbe3b520d8ec5b.jpg", alt: "Arte 3D e Interacción" }
+  { src: "/images/1.png", alt: "VARTICA Metaverse" },
+  { src: "/images/2.png", alt: "Arte 3D e Interacción" },
+  { src: "/images/3.png", alt: "Arte 3D e Interacción" },
+  { src: "/images/4.png", alt: "Arte 3D e Interacción" },
+  { src: "/images/5.png", alt: "Arte 3D e Interacción" },
+  { src: "/images/6.png", alt: "Arte 3D e Interacción" }
 ];
 
 export default function Info({ showFooter = true }) {
@@ -163,12 +166,7 @@ export default function Info({ showFooter = true }) {
               </div>
             </div>
           </div>
-          <div className="div">
-            <iframe
-              src="http://localhost:8088/superset/dashboard/1/"
-              style={{ width: "100%", height: "90vh", border: "none" }}
-            />
-          </div>
+          
         </section>
       </main>
 
