@@ -1,8 +1,7 @@
 // src/api/auctionService.js
-import axios from 'axios';
 
-// URL base de tu API Laravel
-const API_URL = 'https://backend-z57u.onrender.com/api';
+import api from './axios';
+
 
 /**
  * Servicio para gestionar las operaciones de subastas
@@ -14,7 +13,7 @@ const auctionService = {
    */
   getActiveAuctions: async () => {
     try {
-      const response = await axios.get(`${API_URL}/auctions`);
+      const response = await api.get('/auctions');
       return response.data;
     } catch (error) {
       console.error('Error al obtener subastas:', error);
@@ -28,7 +27,7 @@ const auctionService = {
    */
   getAuctionById: async (id) => {
     try {
-      const response = await axios.get(`${API_URL}/auctions/${id}`);
+      const response = await api.get(`/auctions/${id}`);
       return response.data;
     } catch (error) {
       console.error(`Error al obtener subasta ${id}:`, error);
@@ -49,14 +48,9 @@ const auctionService = {
    * POST /api/auctions
    */
   createAuction: async (auctionData) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(`${API_URL}/auctions`, auctionData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+     try {
+      // ✅ Sin headers redundantes - el interceptor lo hace
+      const response = await api.post('/auctions', auctionData);
       return response.data;
     } catch (error) {
       console.error('Error al crear subasta:', error);
@@ -70,16 +64,9 @@ const auctionService = {
    */
   updateDeadline: async (auctionId, fechaFin) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.patch(
-        `${API_URL}/auctions/${auctionId}/update-deadline`,
-        { fecha_fin: fechaFin },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
+      const response = await api.patch(
+        `/auctions/${auctionId}/update-deadline`,
+        { fecha_fin: fechaFin }
       );
       return response.data;
     } catch (error) {
@@ -93,22 +80,14 @@ const auctionService = {
    * POST /api/auctions/:id/bid
    */
   placeBid: async (auctionId, amount) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${API_URL}/auctions/${auctionId}/bid`,
-        { monto: parseFloat(amount) },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
+   try {
+      const response = await api.post(
+        `/auctions/${auctionId}/bid`,
+        { monto: parseFloat(amount) }
       );
       return response.data;
     } catch (error) {
       console.error('Error al realizar puja:', error);
-      // Retornar el mensaje de error específico del backend
       if (error.response?.data?.error) {
         throw new Error(error.response.data.error);
       }
@@ -122,16 +101,7 @@ const auctionService = {
    */
   finalizeAuction: async (auctionId) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${API_URL}/auctions/${auctionId}/finalize`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post(`/auctions/${auctionId}/finalize`, {});
       return response.data;
     } catch (error) {
       console.error('Error al finalizar subasta:', error);
@@ -144,17 +114,8 @@ const auctionService = {
    * POST /api/auctions/:id/cancel
    */
   cancelAuction: async (auctionId) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${API_URL}/auctions/${auctionId}/cancel`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+   try {
+      const response = await api.post(`/auctions/${auctionId}/cancel`, {});
       return response.data;
     } catch (error) {
       console.error('Error al cancelar subasta:', error);
@@ -167,13 +128,8 @@ const auctionService = {
    * GET /api/my-bids
    */
   getMyBids: async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`${API_URL}/my-bids`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+   try {
+      const response = await api.get('/my-bids');
       return response.data;
     } catch (error) {
       console.error('Error al obtener mis pujas:', error);
