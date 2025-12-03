@@ -30,6 +30,18 @@ export default function Login() {
     } catch (err) {
       setError('Credenciales incorrectas');
     }
+    // En handleSubmit, después de recibir la respuesta:
+    const data = await login(email, password);
+
+    // Verificar que el token exista
+    console.log('Token recibido:', data.token); // DEBUG
+
+    if (data.token) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+    } else {
+      throw new Error('No se recibió token del servidor');
+    }
   };
 
   const handleGoogleLogin = async () => {
@@ -41,7 +53,7 @@ export default function Login() {
       const idToken = await firebaseUser.getIdToken();
 
       // Enviar el token a tu backend Laravel
-      const response = await fetch("http://localhost:8000/api/firebase-login", {
+      const response = await fetch("https://backend-z57u.onrender.com/api/firebase-login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
