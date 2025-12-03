@@ -88,7 +88,7 @@ export default function Metaverso() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const BACKEND_URL = 'http://localhost:8000/api/unity-files';
+  const BACKEND_URL = 'https://backend-z57u.onrender.com/api/unity-files';
 
   useEffect(() => {
     async function fetchUnityUrls() {
