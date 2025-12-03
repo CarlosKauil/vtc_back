@@ -10,78 +10,65 @@ const SupersetDashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let cancelled = false;
-
-    const fetchGuestToken = async () => {
-      const res = await fetch(
-        (import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000") +
-          "/api/superset/guest-token",
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ dashboard_id: DASHBOARD_ID }),
-        }
-      );
-
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        throw new Error(data?.error || `Error ${res.status} obteniendo token`);
-      }
-      if (!data?.token)
-        throw new Error("No se obtuvo guest token desde el backend");
-
-      return data.token;
-    };
+    if (!containerRef.current) return;
 
     const embed = async () => {
-      if (!containerRef.current) return;
-      setLoading(true);
-      setError(null);
-
       try {
+        setLoading(true);
+        setError(null);
+
         await embedDashboard({
           id: DASHBOARD_ID,
           supersetDomain:
-            import.meta.env.VITE_SUPERSET_URL ||
-            "https://vartica.uiacreative.xyz",
-          embedHost: window.location.origin || "http://localhost:5173/supersetdashboard", // fallback si null
+            import.meta.env.VITE_SUPERSET_URL || "http://vartica.uiacreative.xyz",
           mountPoint: containerRef.current,
-          fetchGuestToken,
+          // --- TU LÓGICA DE FETCH EXACTA ---
+          fetchGuestToken: async () => {
+            const res = await fetch(
+              (import.meta.env.VITE_BACKEND_URL || "http://localhost:8000") +
+                "/api/superset/guest-token"
+            );
+
+            if (!res.ok) {
+              throw new Error("No se pudo obtener guest token");
+            }
+
+            const data = await res.json();
+            return data.token;
+          },
+          // -------------------------------
           dashboardUiConfig: {
             hideTitle: false,
             hideTab: false,
             hideChartControls: true,
-            filters: { visible: true, expanded: false },
+            filters: {
+              visible: true,
+              expanded: false,
+            },
           },
           iframeSandboxExtras: [
-            "allow-same-origin",
-            "allow-scripts",
-            "allow-forms",
+            "allow-top-navigation",
+            "allow-popups-to-escape-sandbox",
           ],
           referrerPolicy: "strict-origin-when-cross-origin",
         });
 
-        if (!cancelled) setLoading(false);
+        setLoading(false);
       } catch (err) {
-        if (!cancelled) {
-          setError(err?.message || "Error desconocido al cargar el dashboard");
-          setLoading(false);
-        }
+        console.error("Error embedding dashboard:", err);
+        setError("Error al cargar el dashboard. Verifique su conexión.");
+        setLoading(false);
       }
     };
 
     embed();
-
-    return () => {
-      cancelled = true;
-      if (containerRef.current) containerRef.current.innerHTML = "";
-    };
   }, []);
 
   return (
     <DashboardLayout>
-      <div style={{ position: "relative", width: "100%", height: "80vh" }}>
+      <div style={{ position: "relative", width: "100%", height: "calc(100vh - 64px)" }}>
+        
+        {/* Estilos del diseño solicitado */}
         <style>
           {`
             .superset-container iframe {
@@ -96,15 +83,22 @@ const SupersetDashboard = () => {
           `}
         </style>
 
+        {/* UI de Error */}
         {error && (
           <div
             style={{
-              color: "red",
-              padding: "0.5rem",
+              position: "absolute",
+              top: "1rem",
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 20,
+              color: "#721c24",
+              padding: "0.75rem 1.25rem",
               marginBottom: "0.5rem",
               fontSize: "0.875rem",
               textAlign: "center",
-              backgroundColor: "#ffe5e5",
+              backgroundColor: "#f8d7da",
+              border: "1px solid #f5c6cb",
               borderRadius: "0.25rem",
             }}
           >
@@ -112,6 +106,7 @@ const SupersetDashboard = () => {
           </div>
         )}
 
+        {/* UI de Loading (Spinner) */}
         {loading && (
           <div
             style={{
@@ -143,6 +138,7 @@ const SupersetDashboard = () => {
           </div>
         )}
 
+        {/* Contenedor del Dashboard */}
         <div
           className="superset-container"
           ref={containerRef}
@@ -151,6 +147,7 @@ const SupersetDashboard = () => {
             height: "100%",
             position: "relative",
             overflow: "hidden",
+            backgroundColor: "#fff",
           }}
         />
       </div>
