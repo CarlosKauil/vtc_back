@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { embedDashboard } from "@superset-ui/embedded-sdk";
 import DashboardLayout from "../layouts/DashboardLayout";
 
-const DASHBOARD_ID = "65af3864-ec70-4702-96bc-5de13c1bc2ff";
+const DASHBOARD_ID = "fd5edd51-8ac5-427e-b211-7f53d9015d32";
 
 const SupersetDashboard = () => {
   const containerRef = useRef(null);
@@ -15,7 +15,7 @@ const SupersetDashboard = () => {
     const fetchGuestToken = async () => {
       const res = await fetch(
         (import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000") +
-          "/api/preset/guest-token",
+          "/api/superset/guest-token",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ const SupersetDashboard = () => {
           id: DASHBOARD_ID,
           supersetDomain:
             import.meta.env.VITE_SUPERSET_URL ||
-            "https://60a3fe8a.us1a.app.preset.io",
+            "https://vartica.uiacreative.xyz",
           embedHost: window.location.origin || "http://localhost:5173/supersetdashboard", // fallback si null
           mountPoint: containerRef.current,
           fetchGuestToken,
