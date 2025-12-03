@@ -3,14 +3,13 @@ import axios from 'axios';
 
 
 export const login = async (email, password) => {
-  // CSRF token debe venir del dominio raíz, no de /api
-  await axios.get('https://backend-z57u.onrender.com/sanctum/csrf-cookie', {
-    withCredentials: true
-  });
-
-  // Ahora sí, login dentro de /api
-  const response = await api.post('/login', { email, password });
-  return response.data;
+  try {
+    const response = await api.post('/login', { email, password });
+    return response.data;
+  } catch (error) {
+    console.error('Error en login:', error);
+    throw error;
+  }
 };
 // ======= AUTENTICACIÓN Y USUARIO =======
 
@@ -29,18 +28,28 @@ export const artistRegister = async (data) => {
   return response.data;
 };
 
-// Logout local en frontend
-export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
+export const logout = async () => {
+  try {
+    await api.post('/logout');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  } catch (error) {
+    console.error('Error en logout:', error);
+    // Limpiar de todas formas
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
 };
 
 // Obtener usuario autenticado (protegido)
-export const getUser = async (token) => {
-  const response = await api.get('/user', {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
+export const getUser = async () => {
+  try {
+    const response = await api.get('/user');
+    return response.data;
+  } catch (error) {
+    console.error('Error obteniendo usuario:', error);
+    throw error;
+  }
 };
 
 // Endpoint solo admin (protegido)

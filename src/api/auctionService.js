@@ -2,11 +2,9 @@
 
 import api from './axios';
 
-// URL base de tu API Laravel
-const API_URL = 'https://backend-z57u.onrender.com/api'; //https://backend-z57u.onrender.com
-
 /**
  * Servicio para gestionar las operaciones de subastas
+ * ✅ CORREGIDO: Todos los métodos usan la instancia 'api' con interceptor
  */
 const auctionService = {
   /**
@@ -46,12 +44,10 @@ const auctionService = {
 
   /**
    * Crear una nueva subasta (requiere autenticación)
-   * ✨ ACTUALIZADO: Soporta fecha_fin_custom
    * POST /api/auctions
    */
   createAuction: async (auctionData) => {
-     try {
-      // ✅ Sin headers redundantes - el interceptor lo hace
+    try {
       const response = await api.post('/auctions', auctionData);
       return response.data;
     } catch (error) {
@@ -61,7 +57,7 @@ const auctionService = {
   },
 
   /**
-   * ✨ NUEVO: Actualizar hora límite de subasta
+   * Actualizar hora límite de subasta
    * PATCH /api/auctions/:id/update-deadline
    */
   updateDeadline: async (auctionId, fechaFin) => {
@@ -82,7 +78,7 @@ const auctionService = {
    * POST /api/auctions/:id/bid
    */
   placeBid: async (auctionId, amount) => {
-   try {
+    try {
       const response = await api.post(
         `/auctions/${auctionId}/bid`,
         { monto: parseFloat(amount) }
@@ -103,7 +99,7 @@ const auctionService = {
    */
   finalizeAuction: async (auctionId) => {
     try {
-      const response = await api.post(`/auctions/${auctionId}/finalize`, {});
+      const response = await api.post(`/auctions/${auctionId}/finalize`);
       return response.data;
     } catch (error) {
       console.error('Error al finalizar subasta:', error);
@@ -116,8 +112,8 @@ const auctionService = {
    * POST /api/auctions/:id/cancel
    */
   cancelAuction: async (auctionId) => {
-   try {
-      const response = await api.post(`/auctions/${auctionId}/cancel`, {});
+    try {
+      const response = await api.post(`/auctions/${auctionId}/cancel`);
       return response.data;
     } catch (error) {
       console.error('Error al cancelar subasta:', error);
@@ -126,30 +122,26 @@ const auctionService = {
   },
 
   /**
-     * Obtener subastas ganadas
-     * Corrección: Usar axios + API_URL + Token Header
-     */
-    getWonAuctions: async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(`${API_URL}/my-won-auctions`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        return response.data;
-      } catch (error) {
-        console.error('Error al obtener subastas ganadas:', error);
-        throw error;
-      }
-    },
+   * Obtener subastas ganadas
+   * GET /api/my-won-auctions
+   * ✅ CORREGIDO: Usa 'api' en lugar de 'axios'
+   */
+  getWonAuctions: async () => {
+    try {
+      const response = await api.get('/my-won-auctions');
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener subastas ganadas:', error);
+      throw error;
+    }
+  },
 
   /**
    * Obtener todas las pujas del usuario autenticado
    * GET /api/my-bids
    */
   getMyBids: async () => {
-   try {
+    try {
       const response = await api.get('/my-bids');
       return response.data;
     } catch (error) {
@@ -160,7 +152,6 @@ const auctionService = {
 
   /**
    * Alias para obtener detalle (usado en Checkout)
-   * Corrección: Reutilizar getAuctionById para no repetir código
    */
   getAuction: async (id) => {
     return await auctionService.getAuctionById(id);
@@ -168,20 +159,14 @@ const auctionService = {
 
   /**
    * Procesar el pago
-   * Corrección: Usar axios + API_URL + Token Header
+   * POST /api/auctions/:id/pay
+   * ✅ CORREGIDO: Usa 'api' en lugar de 'axios'
    */
   processPayment: async (auctionId, paymentData) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${API_URL}/auctions/${auctionId}/pay`, 
-        paymentData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
+      const response = await api.post(
+        `/auctions/${auctionId}/pay`,
+        paymentData
       );
       return response.data;
     } catch (error) {
@@ -190,12 +175,14 @@ const auctionService = {
     }
   },
 
+  /**
+   * Obtener reporte administrativo
+   * GET /api/admin/auctions-report
+   * ✅ CORREGIDO: Usa 'api' en lugar de 'axios'
+   */
   getAdminReport: async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`${API_URL}/admin/auctions-report`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await api.get('/admin/auctions-report');
       return response.data;
     } catch (error) {
       console.error('Error admin report:', error);
@@ -203,22 +190,20 @@ const auctionService = {
     }
   },
 
-  // Crear intención de pago con Stripe
+  /**
+   * Crear intención de pago con Stripe
+   * POST /api/create-payment-intent/:id
+   * ✅ CORREGIDO: Usa 'api' en lugar de 'axios'
+   */
   createPaymentIntent: async (auctionId) => {
     try {
-      const token = localStorage.getItem('token');
-      // Asegúrate de usar la URL correcta de tu API
-      const response = await axios.post(`${API_URL}/create-payment-intent/${auctionId}`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.post(`/create-payment-intent/${auctionId}`);
       return response.data;
     } catch (error) {
       console.error('Error creando intento de pago:', error);
       throw error;
     }
   },
-
-
 };
 
 export default auctionService;
