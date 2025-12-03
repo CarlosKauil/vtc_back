@@ -22,14 +22,6 @@ const CreateAuction = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-// Función helper para obtener la fecha/hora actual en formato datetime-local
-    const getCurrentDateTime = () => {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() + 5); // Agregar 5 minutos de margen
-      return now.toISOString().slice(0, 16);
-    };
-
-
 
 
   const getCurrentDateTime = () => {
@@ -441,37 +433,53 @@ const CreateAuction = () => {
 
                 {/* Fecha/hora de inicio */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2"/>
                     <span className="text-base">⏰</span>
                     <span>Fecha y hora de inicio</span>
                     <span className="text-red-500">*</span>
+                  <label className="block font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                    Fecha y hora de inicio <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="datetime-local"
-                    name="fecha_inicio"
-                    value={formData.fecha_inicio}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded"
-                    required
-                    min={new Date().toISOString().slice(0, 16)}
-                    disabled={isSubmitting}
-                  />
+                      type="datetime-local"
+                      name="fecha_inicio"
+                      value={formData.fecha_inicio}
+                      onChange={handleChange}
+                      required
+                      min={getCurrentDateTime()}
+                      disabled={isSubmitting}
+                      className="
+                        w-full pl-12 pr-4 py-3
+                        border-2 border-gray-300 dark:border-gray-600 rounded-lg
+                        bg-white dark:bg-gray-700
+                        text-gray-900 dark:text-gray-100
+                        focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10
+                        transition-all duration-200 outline-none
+                      "
+                    />
                 </div>
 
                 <div>
-                  <label className="block font-semibold mb-1">
+                  <label className="block font-semibold mb-1 text-gray-900 dark:text-gray-100">
                     Fecha y hora de fin <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="datetime-local"
-                    name="fecha_fin"
-                    value={formData.fecha_fin}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded"
-                    required
-                    min={formData.fecha_inicio || new Date().toISOString().slice(0, 16)}
-                    disabled={isSubmitting}
-                  />
+                   <input
+                      type="datetime-local"
+                      name="fecha_fin"
+                      value={formData.fecha_fin}
+                      onChange={handleChange}
+                      required
+                      min={formData.fecha_inicio || new Date().toISOString().slice(0, 16)}
+                      disabled={isSubmitting}
+                      className="
+                        w-full pl-12 pr-4 py-3
+                        border-2 border-gray-300 dark:border-gray-600 rounded-lg
+                        bg-white dark:bg-gray-700
+                        text-gray-900 dark:text-gray-100
+                        focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10
+                        transition-all duration-200 outline-none
+                      "
+                    />
                 </div>
 
                 {/* Mensajes de error/éxito */}
