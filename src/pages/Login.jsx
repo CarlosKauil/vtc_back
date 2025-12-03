@@ -14,35 +14,46 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  // src/pages/Login.jsx (o donde esté tu archivo)
+
+const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
     try {
-      const data = await login(email, password);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      const user = data.user;
-      if (user.role === 'Admin') {
-        window.location.href = '/admin-home';
-      } else {
-        window.location.href = '/client-home';
-      }
+        // 1. Hacemos la petición UNA sola vez
+        const data = await login(email, password);
+        
+        console.log('Respuesta del servidor:', data); // Debug para ver qué llega
+
+        // 2. Verificamos que el token exista en la respuesta
+        if (data && data.token) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            // 3. Redirección basada en el rol
+            if (data.user.role === 'Admin') {
+                window.location.href = '/admin-home';
+            } else {
+                window.location.href = '/client-home';
+            }
+        } else {
+            // Si la respuesta es 200 pero no trae token
+            setError('Error: No se recibió un token válido.');
+        }
+
     } catch (err) {
-      setError('Credenciales incorrectas');
+        console.error(err);
+        // Manejo de error más detallado
+        if (err.response && err.response.status === 401) {
+            setError('Credenciales incorrectas');
+        } else {
+            setError('Error de conexión con el servidor');
+        }
     }
-    // En handleSubmit, después de recibir la respuesta:
-    const data = await login(email, password);
-
-    // Verificar que el token exista
-    console.log('Token recibido:', data.token); // DEBUG
-
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-    } else {
-      throw new Error('No se recibió token del servidor');
-    }
-  };
+    
+    // IMPORTANTE: He borrado todo el código duplicado que tenías aquí abajo.
+};
 
   const handleGoogleLogin = async () => {
     setError('');
