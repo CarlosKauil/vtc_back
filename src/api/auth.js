@@ -1,16 +1,20 @@
+import api from './axios';
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'https://backend-z57u.onrender.com/api', //https://backend-z57u.onrender.com/ , http://localhost:8000/api
-});
 
-// ======= AUTENTICACIÓN Y USUARIO =======
-
-// Login
 export const login = async (email, password) => {
+  // CSRF token debe venir del dominio raíz, no de /api
+  await axios.get('https://backend-z57u.onrender.com/sanctum/csrf-cookie', {
+    withCredentials: true
+  });
+
+  // Ahora sí, login dentro de /api
   const response = await api.post('/login', { email, password });
   return response.data;
 };
+// ======= AUTENTICACIÓN Y USUARIO =======
+
+ 
 
 // Registro usuario general
 export const register = async (name, email, password, role) => {
