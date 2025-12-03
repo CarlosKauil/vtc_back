@@ -20,7 +20,7 @@ function getImageUrl(obra) {
       return imagePath;
     }
     // Ajusta este localhost si tu backend está en otro puerto o dominio en producción
-    return `http://localhost:8000/storage/${imagePath}`;
+    return `https://backend-z57u.onrender.com/storage/${imagePath}`;
   }
   
   return null;
