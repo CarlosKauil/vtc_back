@@ -16,12 +16,24 @@ const CreateAuction = () => {
     fecha_fin: '',
   });
 
+  
   const [obras, setObras] = useState([]);
   const [loadingObras, setLoadingObras] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() + 5);
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
   // Cargar obras aceptadas/subastables
   useEffect(() => {
     loadObrasAceptadas();
@@ -419,36 +431,50 @@ const CreateAuction = () => {
 
                 {/* Fecha/hora de inicio */}
                 <div>
-                  <label className="block font-semibold mb-1">
+                  <label className="block font-semibold mb-1 text-gray-900 dark:text-gray-100">
                     Fecha y hora de inicio <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="datetime-local"
-                    name="fecha_inicio"
-                    value={formData.fecha_inicio}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded"
-                    required
-                    min={new Date().toISOString().slice(0, 16)}
-                    disabled={isSubmitting}
-                  />
+                      type="datetime-local"
+                      name="fecha_inicio"
+                      value={formData.fecha_inicio}
+                      onChange={handleChange}
+                      required
+                      min={getCurrentDateTime()}
+                      disabled={isSubmitting}
+                      className="
+                        w-full pl-12 pr-4 py-3
+                        border-2 border-gray-300 dark:border-gray-600 rounded-lg
+                        bg-white dark:bg-gray-700
+                        text-gray-900 dark:text-gray-100
+                        focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10
+                        transition-all duration-200 outline-none
+                      "
+                    />
                 </div>
 
                 {/* Fecha/hora de fin */}
                 <div>
-                  <label className="block font-semibold mb-1">
+                  <label className="block font-semibold mb-1 text-gray-900 dark:text-gray-100">
                     Fecha y hora de fin <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="datetime-local"
-                    name="fecha_fin"
-                    value={formData.fecha_fin}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded"
-                    required
-                    min={formData.fecha_inicio || new Date().toISOString().slice(0, 16)}
-                    disabled={isSubmitting}
-                  />
+                   <input
+                      type="datetime-local"
+                      name="fecha_fin"
+                      value={formData.fecha_fin}
+                      onChange={handleChange}
+                      required
+                      min={formData.fecha_inicio || new Date().toISOString().slice(0, 16)}
+                      disabled={isSubmitting}
+                      className="
+                        w-full pl-12 pr-4 py-3
+                        border-2 border-gray-300 dark:border-gray-600 rounded-lg
+                        bg-white dark:bg-gray-700
+                        text-gray-900 dark:text-gray-100
+                        focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10
+                        transition-all duration-200 outline-none
+                      "
+                    />
                 </div>
 
                 {/* Mensajes de error/éxito */}
@@ -560,7 +586,7 @@ const CreateAuction = () => {
                         </span>
                       </div>
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                        <span className="text-sm text-white-600 dark:text-gray-400 font-medium">
                           Fecha de inicio:
                         </span>
                         <span className="text-base font-semibold text-gray-900 dark:text-gray-100">

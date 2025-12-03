@@ -3,12 +3,15 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auctionService from '../../api/auctionService';
 import DashboardLayout from '../../layouts/DashboardLayout';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle.js';
+
 
 /**
  * Historial de pujas del usuario autenticado
  * Muestra todas las pujas realizadas con estado de la subasta
  */
 const MyBids = () => {
+  useDocumentTitle('Vartica | Mis Pujas');
   const [bids, setBids] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

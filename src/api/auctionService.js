@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // URL base de tu API Laravel
-const API_URL = 'https://backend-z57u.onrender.com/api';
+const API_URL = 'https://backend-z57u.onrender.com/api'; //https://backend-z57u.onrender.com
 
 /**
  * Servicio para gestionar las operaciones de subastas
@@ -163,6 +163,25 @@ const auctionService = {
   },
 
   /**
+     * Obtener subastas ganadas
+     * Corrección: Usar axios + API_URL + Token Header
+     */
+    getWonAuctions: async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${API_URL}/my-won-auctions`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error('Error al obtener subastas ganadas:', error);
+        throw error;
+      }
+    },
+
+  /**
    * Obtener todas las pujas del usuario autenticado
    * GET /api/my-bids
    */
@@ -180,6 +199,68 @@ const auctionService = {
       throw error;
     }
   },
+
+  /**
+   * Alias para obtener detalle (usado en Checkout)
+   * Corrección: Reutilizar getAuctionById para no repetir código
+   */
+  getAuction: async (id) => {
+    return await auctionService.getAuctionById(id);
+  },
+
+  /**
+   * Procesar el pago
+   * Corrección: Usar axios + API_URL + Token Header
+   */
+  processPayment: async (auctionId, paymentData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `${API_URL}/auctions/${auctionId}/pay`, 
+        paymentData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error al procesar pago:', error);
+      throw error;
+    }
+  },
+
+  getAdminReport: async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${API_URL}/admin/auctions-report`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error admin report:', error);
+      throw error;
+    }
+  },
+
+  // Crear intención de pago con Stripe
+  createPaymentIntent: async (auctionId) => {
+    try {
+      const token = localStorage.getItem('token');
+      // Asegúrate de usar la URL correcta de tu API
+      const response = await axios.post(`${API_URL}/create-payment-intent/${auctionId}`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creando intento de pago:', error);
+      throw error;
+    }
+  },
+
+
 };
 
 export default auctionService;

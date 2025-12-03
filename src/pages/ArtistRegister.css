@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .auth-page-container {
   min-height: 100vh;
   background: url('/images/fondo-kreaverse.webp') no-repeat center center fixed;
@@ -5,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px;
+  padding: 0;
   position: relative;
 }
 
@@ -32,7 +33,8 @@
   box-shadow: 0 8px 32px rgba(60,60,60,0.13);
   padding: 40px 32px 32px 32px;
   max-width: 700px;
-  width: 100%;
+  width: 90%;
+  min-width: 300px; 
   margin: 48px auto;
   display: flex;
   flex-direction: column;
@@ -90,9 +92,40 @@
   font-weight: 500;
   box-sizing: border-box;
 }
+
+/* Checkbox y términos */
 .terms-field {
   grid-column: span 2;
   padding-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terms-field input[type="checkbox"] {
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+}
+
+.terms-field label {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1e293b;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.terms-field .terms-link {
+  color: #6c63ff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+}
+.terms-field .terms-link:hover {
+  color: #4b47b5;
 }
 
 /* Botones */
@@ -162,21 +195,7 @@
   text-align: center;
 }
 
-/* Enlace de términos y condiciones */
-.terms-link {
-  color: #6c63ff;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.2s;
-  font-weight: 600;
-  outline: none;
-}
-.terms-link:hover,
-.terms-link:focus {
-  color: #4b47b5;
-}
-
-/* Modal y overlay desenfocado */
+/* Modal de términos */
 .terms-modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -188,13 +207,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 16px;
 }
 .terms-modal {
   background: #fff;
   border-radius: 16px;
   padding: 32px 20px 20px;
   max-width: 620px;
-  width: 95vw;
+  width: 100%;
   max-height: 90vh;
   overflow: auto;
   position: relative;
@@ -232,9 +252,11 @@
 .terms-content iframe {
   border-radius: 8px;
   background: #f9f9fa;
+  width: 100%;
+  height: 400px; /* tamaño por defecto */
 }
 
-/* RESPONISVE */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .register-card {
     padding: 24px 16px;
@@ -242,6 +264,7 @@
     margin: 24px 0;
   }
   .register-fields-grid {
+    
     grid-template-columns: 1fr;
     gap: 14px;
   }
@@ -253,6 +276,7 @@
     display: none;
   }
 }
+
 @media (max-width: 700px) {
   .terms-modal {
     padding: 16px 4vw 14px 4vw;
@@ -260,5 +284,25 @@
   }
   .terms-content iframe {
     height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 16px 12px;
+    margin: 16px 0;
+    border-radius: 16px;
+  }
+  .register-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .login-btn.register-btn,
+  .login-btn-outline {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+  .terms-field label {
+    font-size: 0.95rem;
   }
 }
