@@ -17,7 +17,7 @@ const SupersetDashboard = () => {
         (import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000") +
           "/api/superset/guest-token",
         {
-          method: "POST",
+          method: "GET",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ dashboard_id: DASHBOARD_ID }),
         }
