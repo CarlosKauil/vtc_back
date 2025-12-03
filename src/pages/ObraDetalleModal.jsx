@@ -15,7 +15,7 @@ export default function ObraDetalleModal({ obra, onClose }) {
 
     // Usamos la URL generada por el Accessor de Laravel como principal.
     // Incluimos un fallback por si 'archivo_url' no se ha cargado por alguna razón.
-    const finalArchivoUrl = archivo_url || `http://localhost:8000/storage/${archivo}`; 
+    const finalArchivoUrl = archivo_url || `https://backend-z57u.onrender.com/storage/${archivo}`; 
 
     // Obtenemos la extensión del archivo a partir de la ruta relativa para la previsualización.
     const ext = archivo ? archivo.split('.').pop().toLowerCase() : '';

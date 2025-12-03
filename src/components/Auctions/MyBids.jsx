@@ -52,7 +52,7 @@ const MyBids = () => {
       if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
         return imagePath;
       }
-      return `http://localhost:8000/storage/${imagePath}`;
+      return `https://backend-z57u.onrender.com/storage/${imagePath}`;
     }
     
     return 'https://via.placeholder.com/200?text=Sin+Imagen';
@@ -293,7 +293,7 @@ const MyBids = () => {
                     <div>
                       <Link to={`/auctions/${bid.obra?.id}`}>
                         <h3 className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-100 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
-                          {bid.obra?.titulo || 'Título no disponible'}
+                          {bid.obra?.nombre || 'Título no disponible'}
                         </h3>
                       </Link>
                       {bid.obra?.artista && (

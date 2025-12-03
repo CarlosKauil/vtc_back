@@ -161,7 +161,7 @@ const CreateAuction = () => {
       if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
         return filePath;
       }
-      return `http://localhost:8000/storage/${filePath}`;
+      return `https://backend-z57u.onrender.com/storage/${filePath}`;
     }
     return null;
   };

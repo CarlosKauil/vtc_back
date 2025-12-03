@@ -80,7 +80,7 @@ const AuctionCard = ({ auction, onBidPlaced }) => {
       if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
         return imagePath;
       }
-      return `http://localhost:8000/storage/${imagePath}`;
+      return `https://backend-z57u.onrender.com/storage/${imagePath}`;
     }
     
     return 'https://via.placeholder.com/400x300?text=Sin+Imagen';
