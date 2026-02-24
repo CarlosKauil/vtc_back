@@ -120,6 +120,10 @@ const CreateAuction = () => {
         fecha_inicio: formData.fecha_inicio,
         fecha_fin: formData.fecha_fin,
       };
+          
+      // ← DEBUGGING →
+      console.log('🔍 formData completo:', formData);
+      console.log('📤 Payload enviado:', payload);
 
       await auctionService.createAuction(payload);
 

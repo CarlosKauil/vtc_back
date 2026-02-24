@@ -1,53 +1,276 @@
-.content {
+/* Importamos fuentes modernas */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap');
 
-    justify-content: center;
-    align-self: center;
-}
-.unity-wrapper {
-  width: 90%;
-  max-width: 1000px;
-  height: 600px;
-  margin: 400px auto;
-  border: 2px solid white;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-  background-color: #111a23;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* --- LAYOUT GENERAL --- */
+.page-layout {
   position: relative;
-}
-
-.unity-wrapper canvas {
-  display: block !important;
-  margin: 0 auto !important;
-  position: relative !important;
-  left: 0 !important;
-  right: 0 !important;
-}
-
-.loading-text {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: hidden;
+  font-family: 'Outfit', sans-serif;
   color: white;
-  font-size: 18px;
+  background: #0f172a; /* Fondo base oscuro */
 }
 
-.unity-wrapper {
-    width: 90%;
-  max-width: 1000px;
-  height: 600px;
-    margin: 40px auto;
-     border: 2px solid white;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-  background-color: #5e9fdf;
+/* --- FONDO LÍQUIDO ANIMADO --- */
+.liquid-background {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 20s infinite ease-in-out;
+}
+
+.blob-1 {
+  width: 600px; height: 600px;
+  background: #7c3aed; /* Violeta */
+  top: -100px; left: -100px;
+}
+
+.blob-2 {
+  width: 500px; height: 500px;
+  background: #3b82f6; /* Azul */
+  bottom: -50px; right: -100px;
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  width: 400px; height: 400px;
+  background: #ec4899; /* Rosa */
+  bottom: 20%; left: 30%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+/* --- CAPAS DE UI (Navbar/Footer) --- */
+.ui-layer-top, .ui-layer-bottom {
+  position: relative;
+  z-index: 100;
+  /* Asegura que Navbar y Footer estén por encima del fondo */
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* --- PANEL DE VIDRIO (CONSOLA) --- */
+.glass-console {
+  width: 900px;
+  /* El alto se ajusta al contenido, pero el viewport es fijo */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* Header del Panel */
+.glass-header {
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.status-indicator {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #a5f3fc;
 }
 
+.dot {
+  width: 8px; height: 8px;
+  background: #22d3ee;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22d3ee;
+}
 
-.loading-text {
+.console-title {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.window-controls span {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  margin-left: 6px;
+}
+
+/* Viewport Unity */
+.unity-viewport {
+  width: 100%;
+  height: 600px; /* Alto fijo solicitado */
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.unity-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Footer del Panel */
+.glass-footer {
+  padding: 15px 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Botones Glass */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  font-size: 18px;
+  padding: 8px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* --- LOADER LÍQUIDO --- */
+.glass-loader {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+}
+
+.liquid-spinner {
+  width: 50px; height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #c084fc; /* Violeta claro */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+/* --- MODAL DE FEEDBACK (GLASS) --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glass-modal {
+  width: 450px;
+  background: rgba(30, 41, 59, 0.7); /* Slate oscuro semitransparente */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 { margin: 0; font-weight: 500; }
+
+.close-btn {
+  background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.5rem; cursor: pointer;
+}
+
+.star-rating-container {
+  display: flex; gap: 10px; justify-content: center; margin: 10px 0;
+}
+
+.star-btn {
+  background: none; border: none; font-size: 1.8rem; color: rgba(255,255,255,0.2); cursor: pointer; transition: color 0.2s;
+}
+
+.star-btn.active, .star-btn:hover { color: #fbbf24; drop-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+
+.glass-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  color: white;
+  min-height: 100px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.glass-input:focus { outline: none; border-color: #a78bfa; }
+
+.btn-liquid-primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-liquid-primary:hover { transform: scale(1.02); }
+
+/* Warning de Rotación */
+.glass-warning {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }

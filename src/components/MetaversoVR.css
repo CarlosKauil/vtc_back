@@ -1,0 +1,99 @@
+/* Importar si no se cargan automáticamente */
+/* @import './Metaverso.css'; */
+
+/* --- VARIANTE DE FONDO VR --- */
+.liquid-background.vr-variant .blob-vr-1 {
+  width: 700px; height: 700px;
+  background: #6d28d9; /* Violeta Oscuro */
+  top: -20%; right: -10%;
+  animation: float 25s infinite ease-in-out;
+  filter: blur(100px);
+  opacity: 0.5;
+}
+
+.liquid-background.vr-variant .blob-vr-2 {
+  width: 500px; height: 500px;
+  background: #db2777; /* Magenta Neón */
+  bottom: -10%; left: -10%;
+  animation: float 20s infinite ease-in-out reverse;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+/* --- CONSOLA VR --- */
+.vr-console {
+  border-color: rgba(219, 39, 119, 0.3); /* Borde rosado */
+  box-shadow: 0 0 60px rgba(109, 40, 217, 0.3);
+}
+
+.vr-header {
+  background: linear-gradient(90deg, rgba(109,40,217,0.1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.vr-dot {
+  background: #f0abfc;
+  box-shadow: 0 0 10px #f0abfc;
+}
+
+.vr-badge {
+  background: rgba(219, 39, 119, 0.2);
+  color: #f5d0fe;
+  font-size: 0.6em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(219, 39, 119, 0.5);
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+/* --- CARGADOR E ICONOS VR --- */
+.vr-headset-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: float-icon 3s ease-in-out infinite;
+}
+
+.vr-spinner {
+  border-top-color: #db2777; /* Magenta */
+  border-left-color: #c084fc; /* Violeta */
+}
+
+.vr-pulse-icon {
+  font-size: 3rem;
+  animation: pulse-vr 1.5s infinite;
+}
+
+@keyframes pulse-vr {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* --- TEXTOS DE SEGURIDAD --- */
+.vr-footer {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vr-safety-text {
+  font-size: 0.8rem;
+  color: #fbcfe8;
+  opacity: 0.8;
+}
+
+/* Botón trigger en la vista normal para ir a VR */
+.btn-vr-trigger {
+  border-color: #c084fc;
+  color: #e9d5ff;
+  background: rgba(192, 132, 252, 0.1);
+}
+
+.btn-vr-trigger:hover {
+  background: rgba(192, 132, 252, 0.25);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+}

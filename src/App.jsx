@@ -23,6 +23,8 @@ import ObraForm from './pages/ObraForm';
 import ObrasTable from './components/ObrasTable';
 import MetabaseDashboard from './components/MetabaseDashboard';
 
+import MetaversoVR from './components/MetaversoVR';
+
 // 🧑‍🎨 Perfil del artista
 import PublicProfileView from './components/PublicProfileView'; 
 import ArtistProfileForm from './components/ArtistProfileForm';
@@ -59,7 +61,7 @@ function App() {
         <Route path="/supersetdashboard" element={<SupersetDashboard />} />
         <Route path="/pricing-plans" element={<PricingPlans />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        
+        <Route path="/vr" element={<MetaversoVR />} />
 
         {/* 🧑‍🎨 Perfil público del artista (no requiere login) */}
         <Route path="/artist/:link" element={<PublicProfileView />} />
