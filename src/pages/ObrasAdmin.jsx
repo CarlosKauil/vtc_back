@@ -50,9 +50,18 @@ export default function ObrasAdmin() {
         setLoading(true);
         try {
             const data = await getObras(estatusId);
-            setObras(data);
+            
+            // CORRECCIÓN: Ordenar descendente por ID (Más reciente primero)
+            if (Array.isArray(data)) {
+                // b.id - a.id pone los IDs más altos primero
+                const obrasOrdenadas = [...data].sort((a, b) => b.id - a.id);
+                setObras(obrasOrdenadas);
+            } else {
+                setObras([]);
+            }
         } catch (error) {
             console.error('Error al cargar obras:', error);
+            setObras([]);
         } finally {
             setLoading(false);
         }

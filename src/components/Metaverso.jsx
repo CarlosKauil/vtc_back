@@ -158,8 +158,13 @@ function UnityGame({ urls }) {
 export default function Metaverso() {
   const [unityUrls, setUnityUrls] = useState(null);
   const [error, setError] = useState(null);
+
   
   // Tu URL de producción
+
+  const [isLoading, setIsLoading] = useState(true);
+
+
   const BACKEND_URL = 'https://backend-z57u.onrender.com/api/unity-files';
 
   useEffect(() => {

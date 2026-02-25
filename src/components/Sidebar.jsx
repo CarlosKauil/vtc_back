@@ -8,16 +8,17 @@ import {
   FaUsers,
   FaCompass,
   FaChartPie,
-  FaGavel, // 🆕 Icono de subasta (martillo de juez)
-  FaHistory, // 🆕 Icono de historial
-  FaPlusCircle, // 🆕 Icono de crear
+  FaGavel, 
+  FaHistory, 
+  FaPlusCircle,
+  FaTrophy, // 🆕 AGREGADO: Icono de Trofeo para Victorias
 } from "react-icons/fa";
 
 export default function Sidebar({ open, setOpen }) {
   const user = JSON.parse(localStorage.getItem("user"));
   const location = useLocation();
   const [openObrasDropdown, setOpenObrasDropdown] = React.useState(false);
-  const [openSubastasDropdown, setOpenSubastasDropdown] = React.useState(false); // 🆕 Estado para dropdown de subastas
+  const [openSubastasDropdown, setOpenSubastasDropdown] = React.useState(false);
 
   // Función para comprobar ruta activa
   const isActive = (path) => location.pathname === path;
@@ -34,7 +35,7 @@ export default function Sidebar({ open, setOpen }) {
 
       <aside
         className={`
-          fixed z-40 top-0 left-0 h-screen w-64 
+          fixed z-40 top-0 left-0 w-64 
           bg-gradient-to-b from-gray-900 to-gray-800 
           text-white shadow-lg transform transition-transform duration-200
           ${open ? "translate-x-0" : "-translate-x-full"}
@@ -64,7 +65,7 @@ export default function Sidebar({ open, setOpen }) {
             Dashboard - Vartica
           </Link>
 
-          {/* 🆕 💰 SUBASTAS - Acceso público para todos */}
+          {/* 🆕 💰 SUBASTAS */}
           <div>
             <div className="uppercase text-xs text-gray-400 mb-2 ml-1 mt-4">
               💰 Subastas
@@ -93,6 +94,22 @@ export default function Sidebar({ open, setOpen }) {
               >
                 <FaHistory size={20} />
                 Mis Pujas
+              </Link>
+            )}
+
+            {/* ✨ NUEVO: Mis Adquisiciones (Ganadas) - Solo autenticados */}
+            {user && (
+              <Link
+                to="/auctions/won"
+                className={`flex items-center gap-3 p-3 rounded-lg transition group ${
+                  isActive("/auctions/won") || location.pathname.includes("/certificate") 
+                    ? "bg-gray-700" 
+                    : "hover:bg-gray-700"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                <FaTrophy size={20} className="text-yellow-500 group-hover:text-yellow-400 transition-colors" />
+                Mis Adquisiciones
               </Link>
             )}
 
@@ -131,7 +148,6 @@ export default function Sidebar({ open, setOpen }) {
                 Gestionar mis obras
               </Link>
 
-              {/* 🧑‍🎨 Perfil del artista */}
               <Link
                 to="/perfil"
                 className={`flex items-center gap-3 p-3 rounded-lg transition ${
@@ -143,7 +159,6 @@ export default function Sidebar({ open, setOpen }) {
                 Mi perfil artístico
               </Link>
 
-              {/* 🔗 Enlace directo a su perfil público */}
               {user?.artist_link && (
                 <Link
                   to={`/artist/${user.artist_link}`}
@@ -167,21 +182,6 @@ export default function Sidebar({ open, setOpen }) {
               <div className="uppercase text-xs text-gray-400 mb-2 ml-1 mt-4">
                 Menús del Administrador
               </div>
-
-              {/* Dashboard de datos */}
-              <Link
-                to="/vartica/dashboard"
-                className={`flex items-center gap-3 p-3 rounded-lg transition ${
-                  isActive("/vartica/dashboard")
-                    ? "bg-gray-700"
-                    : "hover:bg-gray-700"
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                <FaChartPie size={20} />
-                Dashboard de Datos
-              </Link>
-
               <Link
                 to="/supersetdashboard"
                 className={`flex items-center gap-3 p-3 rounded-lg transition ${
@@ -193,6 +193,16 @@ export default function Sidebar({ open, setOpen }) {
               >
                 <FaChartPie size={20} />
                 Dashboard de Kreaverse
+              </Link>
+              <Link
+                to="/admin/sales"
+                className={`flex items-center gap-3 p-3 rounded-lg transition ${
+                  isActive("/admin/sales") ? "bg-gray-700" : "hover:bg-gray-700"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                <FaChartPie size={20} /> {/* O usa FaMoneyBillWave si lo importas */}
+                Reporte de Ventas
               </Link>
 
               {/* Dropdown de Obras */}

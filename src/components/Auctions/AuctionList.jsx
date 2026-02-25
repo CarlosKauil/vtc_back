@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom';
 import AuctionCard from '../../components/Auctions/AuctionCard';
 import auctionService from '../../api/auctionService';
 import DashboardLayout from '../../layouts/DashboardLayout';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle.js';
+
 
 /**
  * Página principal de subastas
  * Muestra todas las subastas activas en formato de grid
  */
 const AuctionList = () => {
+  useDocumentTitle('Vartica | Subastas Activas');
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

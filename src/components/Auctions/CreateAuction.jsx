@@ -16,20 +16,24 @@ const CreateAuction = () => {
     fecha_fin: '',
   });
 
+  
   const [obras, setObras] = useState([]);
   const [loadingObras, setLoadingObras] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-// Función helper para obtener la fecha/hora actual en formato datetime-local
-    const getCurrentDateTime = () => {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() + 5); // Agregar 5 minutos de margen
-      return now.toISOString().slice(0, 16);
-    };
 
 
-
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() + 5);
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
   // Cargar obras aceptadas/subastables
   useEffect(() => {
     loadObrasAceptadas();
@@ -161,7 +165,7 @@ const CreateAuction = () => {
       if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
         return filePath;
       }
-      return `http://localhost:8000/storage/${filePath}`;
+      return `https://backend-z57u.onrender.com/storage/${filePath}`;
     }
     return null;
   };
@@ -433,18 +437,14 @@ const CreateAuction = () => {
 
                 {/* Fecha/hora de inicio */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2"/>
                     <span className="text-base">⏰</span>
                     <span>Fecha y hora de inicio</span>
                     <span className="text-red-500">*</span>
+                  <label className="block font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                    Fecha y hora de inicio <span className="text-red-500">*</span>
                   </label>
-
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none">
-                      📅
-                    </span>
-
-                    <input
+                  <input
                       type="datetime-local"
                       name="fecha_inicio"
                       value={formData.fecha_inicio}
@@ -461,22 +461,13 @@ const CreateAuction = () => {
                         transition-all duration-200 outline-none
                       "
                     />
-                  </div>
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                    <span className="text-base">⏳</span>
-                    <span>Fecha y hora de fin</span>
-                    <span className="text-red-500">*</span>
+                  <label className="block font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                    Fecha y hora de fin <span className="text-red-500">*</span>
                   </label>
-
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none">
-                      📅
-                    </span>
-
-                    <input
+                   <input
                       type="datetime-local"
                       name="fecha_fin"
                       value={formData.fecha_fin}
@@ -493,7 +484,6 @@ const CreateAuction = () => {
                         transition-all duration-200 outline-none
                       "
                     />
-                  </div>
                 </div>
 
                 {/* Mensajes de error/éxito */}
@@ -609,7 +599,7 @@ const CreateAuction = () => {
                         </span>
                       </div>
                       <div className="flex justify-between items-center py-2">
-                        <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                        <span className="text-sm text-white-600 dark:text-gray-400 font-medium">
                           Fecha de inicio:
                         </span>
                         <span className="text-base font-semibold text-gray-900 dark:text-gray-100">

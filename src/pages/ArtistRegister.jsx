@@ -3,10 +3,12 @@ import { artistRegister } from '../api/auth';
 import { getAreas } from '../api/areas';
 import './Auth.css';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-
+import { useNavigate } from 'react-router-dom'; // para redirigir a la página de PDFs
 
 export default function ArtistRegister() {
   useDocumentTitle("Vartica | Registro de Artista");
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -21,7 +23,6 @@ export default function ArtistRegister() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [showTerms, setShowTerms] = useState(false); // ✅ nuevo estado para modal
 
   useEffect(() => {
     getAreas().then(setAreas);
@@ -59,7 +60,7 @@ export default function ArtistRegister() {
       <img src="/images/Logo-KreaVerse.webp" alt="Decoración izquierda" className="corner-img left" />
       <img src="/images/Logo-GVA.webp" alt="Decoración derecha" className="corner-img right" />
 
-      <div className={`auth-card register ${showTerms ? 'blurred' : ''}`}>
+      <div className="auth-card register">
         <div className="auth-logo">
           <img src="/images/vartica.webp" alt="Título del logotipo" className="title-img" />
         </div>
@@ -76,11 +77,12 @@ export default function ArtistRegister() {
               maxLength="11"
             />
           </div>
+
           <div className="auth-field">
-            <label>Alias artistico</label>
+            <label>Alias artístico</label>
             <input
               name="alias"
-              placeholder="Nombre completo (máx. 11)"
+              placeholder="Alias artístico (máx. 11)"
               value={form.alias}
               onChange={handleChange}
               required
@@ -152,8 +154,11 @@ export default function ArtistRegister() {
             />
           </div>
 
-          {/* ✅ Checkbox + botón para abrir modal */}
+          {/* Checkbox + link que redirige a la vista de PDFs */}
           <div className="auth-field terms-field">
+           
+          </div>
+         <div className="auth-field terms-field">
             <input
               type="checkbox"
               id="terms"
@@ -162,15 +167,17 @@ export default function ArtistRegister() {
             />
             <label htmlFor="terms">
               Acepto los{' '}
-              <button
-                type="button"
+              <span
                 className="terms-link"
-                onClick={() => setShowTerms(true)}
+                onClick={() => navigate('/terms-and-conditions')}
               >
                 términos y condiciones
-              </button>
+              </span>
             </label>
           </div>
+
+
+
 
           <div className="register-actions">
             <button
@@ -199,34 +206,6 @@ export default function ArtistRegister() {
         )}
         {error && <p className="auth-error">{error}</p>}
       </div>
-
-      {/* ✅ Modal de términos y condiciones */}
-      {showTerms && (
-        <div className="terms-modal-overlay">
-          <div className="terms-modal">
-            <button
-              className="terms-close"
-              onClick={() => setShowTerms(false)}
-            >
-              ✕
-            </button>
-            <h2>Términos y Condiciones</h2>
-            <div className="terms-content">
-              <p>
-                Bienvenido/a. Al registrarte aceptas las políticas de uso de la
-                plataforma, confidencialidad de datos y los compromisos
-                establecidos con la comunidad de artistas.  
-                <br /><br />
-                Este texto puede reemplazarse por el contenido real del
-                documento de términos y condiciones.  
-                <br /><br />
-                Si no estás de acuerdo, puedes cerrar esta ventana y continuar
-                explorando sin registrarte.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

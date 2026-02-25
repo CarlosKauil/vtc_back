@@ -1,26 +1,46 @@
-// src/axios.js
+// src/api/axios.js
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://backend-z57u.onrender.com/api', // Cambia esto a la URL de tu API
-  //https://lara-backend.onrender.com/api  -  http://localhost:8000/api
-  withCredentials: true, // Cambia a true si usas cookies
+    baseURL: 'https://backend-z57u.onrender.com/api', // Tu URL de backend
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+    // NOTA: Con la solución de token, NO necesitas 'withCredentials: true' obligatoriamente,
+    // pero puedes dejarlo si no causa conflictos CORS. Lo ideal en este caso es quitarlo o ponerlo en false.
 });
 
-api.defaults.headers.common['Accept'] = 'application/json';
-
-
-
-// Agregar token si existe
+// Interceptor para agregar el token automáticamente
 api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
     }
-    return config;
-  },
-  (error) => Promise.reject(error)
 );
 
-export default api; // ✅ Esta es la línea clave
+// Interceptor para manejar errores 401 (token inválido/expirado)
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token inválido o expirado
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      
+      // Redirigir al login solo si no estamos ya ahí
+      if (!window.location.pathname.includes('/login')) {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;
