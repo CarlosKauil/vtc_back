@@ -5,7 +5,6 @@ export default function PricingPlans() {
     {
       name: 'Plan Básico',
       price: 'Gratis',
-      badge: 'Plan actual',
       icon: <Sparkles className="w-6 h-6" />,
       commission: '35% de comisión',
       features: [
@@ -33,6 +32,8 @@ export default function PricingPlans() {
       price: 'Personalizado',
       icon: <Building2 className="w-6 h-6" />,
       commission: 'Desde 25% de comisión',
+      buttonText: 'Contáctanos',
+      link: '/contacto', // Aquí pones la URL de tu formulario
       features: [
         { label: 'Exposición', value: 'Obras ilimitadas' },
         { label: 'Archivos', value: 'Sin restricciones' },
@@ -50,7 +51,7 @@ export default function PricingPlans() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-4 text-4xl font-bold">
-            KreaVerse Plans
+            Planes de KreaVerse
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Elige el plan perfecto para tu arte. Desde artistas emergentes hasta galerías profesionales.
@@ -58,22 +59,16 @@ export default function PricingPlans() {
         </div>
 
         {/* Plans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {plans.map((plan, index) => (
-            <div key={index} className={`relative group ${plan.highlighted ? 'lg:-mt-4 lg:mb-4' : ''}`}>
+            <div key={index} className={`relative group flex ${plan.highlighted ? 'lg:-mt-4 lg:mb-4' : ''}`}>
               
-              {/* Card */}
+              {/* Card - Usamos flex-col y h-full para que todas midan lo mismo */}
               <div
-                className={`relative h-full rounded-3xl p-8 backdrop-blur-xl bg-white/10 border border-white/20 shadow-xl transition-all duration-300 hover:scale-105 hover:bg-white/20 ${
+                className={`relative w-full h-full rounded-3xl p-8 backdrop-blur-xl bg-white/10 border border-white/20 shadow-xl transition-all duration-300 hover:scale-105 hover:bg-white/20 flex flex-col ${
                   plan.highlighted ? 'ring-2 ring-blue-500/50' : ''
                 }`}
               >
-
-                {plan.badge && (
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs">
-                    {plan.badge}
-                  </div>
-                )}
 
                 {/* Icon */}
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white mb-6 shadow-lg">
@@ -120,16 +115,21 @@ export default function PricingPlans() {
                   ))}
                 </ul>
 
-                {/* Button */}
-                <button
-                  className={`w-full py-3 px-6 rounded-xl transition-all duration-300 font-medium ${
-                    plan.highlighted
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg hover:shadow-xl hover:scale-[1.02]'
-                      : 'bg-white/20 text-gray-200 hover:bg-white/30 border border-gray-400/20'
-                  }`}
-                >
-                  {plan.badge ? 'Plan Actual' : 'Seleccionar Plan'}
-                </button>
+                {/* Button / Link - mt-auto hace que siempre se alinee abajo */}
+                {plan.link ? (
+                  <a
+                    href={plan.link}
+                    className="mt-auto w-full py-3 px-6 rounded-xl transition-all duration-300 font-medium bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] text-center"
+                  >
+                    {plan.buttonText}
+                  </a>
+                ) : (
+                  <button
+                    className="mt-auto w-full py-3 px-6 rounded-xl transition-all duration-300 font-medium bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg hover:shadow-xl hover:scale-[1.02]"
+                  >
+                    {plan.buttonText || 'Seleccionar Plan'}
+                  </button>
+                )}
               </div>
 
               {/* Glow */}

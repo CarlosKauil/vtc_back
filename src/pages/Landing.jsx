@@ -7,6 +7,8 @@ import Navbar from '../components/Navbar';
 import ActiveAuctionsPreview from '../components/ActiveAuctionsPreview';
 import './Landing.css';
 import PricingPlans from './PricingPlans';
+
+import ChatBot from '../components/ChatBot';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 
@@ -22,6 +24,7 @@ export default function Landing() {
       <PricingPlans />
       <AreasSection />
       <Footer />
+      <ChatBot />
     </div>
   );
 }

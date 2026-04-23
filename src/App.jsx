@@ -20,6 +20,7 @@ import Info from './components/Info';
 // 🎨 Componentes
 import Metaverso from './components/Metaverso';
 import ObraForm from './pages/ObraForm';
+import ContactForm from './pages/ContactForm';
 import ObrasTable from './components/ObrasTable';
 import MetabaseDashboard from './components/MetabaseDashboard';
 
@@ -62,7 +63,7 @@ function App() {
         <Route path="/pricing-plans" element={<PricingPlans />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/vr" element={<MetaversoVR />} />
-
+        <Route path="/contacto" element={<ContactForm />} />
         {/* 🧑‍🎨 Perfil público del artista (no requiere login) */}
         <Route path="/artist/:link" element={<PublicProfileView />} />
 

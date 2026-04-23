@@ -31,8 +31,9 @@ function UnityVRGame({ urls }) {
         <Navbar />
       </div>
 
-      <main className="main-content">
-        <div className="glass-console vr-console">
+      <main className="main-content flex-grow flex items-center justify-center min-h-screen relative">
+        {/* 🔥 AQUÍ ESTÁ LA MAGIA: !mt-28 fuerza a la tarjeta a bajar, esquivando el CSS anterior */}
+        <div className="glass-console vr-console !mt-28 md:!mt-22 relative z-10">
           
           {/* Header Específico VR */}
           <div className="glass-header vr-header">
